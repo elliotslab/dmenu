@@ -1,0 +1,31 @@
+diff --git a/config.def.h b/config.def.h
+index 317fa2f..0a9aac5 100644
+--- a/config.def.h
++++ b/config.def.h
+@@ -22,3 +22,6 @@ static unsigned int lineheight = 0;         /* -h option; minimum height of a me
+  * for example: " /?\"&[]"
+  */
+ static const char worddelimiters[] = " ";
++
++/* Size of the window border */
++static const unsigned int border_width = 5;
+\ No newline at end of file
+diff --git a/dmenu.c b/dmenu.c
+index 297d4c4..67bba0e 100644
+--- a/dmenu.c
++++ b/dmenu.c
+@@ -786,10 +786,10 @@ setup(void)
+ 	swa.background_pixel = scheme[SchemeNorm][ColBg].pixel;
+ 	swa.event_mask = ExposureMask | KeyPressMask | VisibilityChangeMask |
+ 						ButtonPressMask;
+-	win = XCreateWindow(dpy, parentwin, x, y, mw, mh, 0,
+-	                    CopyFromParent, CopyFromParent, CopyFromParent,
+-	                    CWOverrideRedirect | CWBackPixel | CWEventMask, &swa);
+-	XSetClassHint(dpy, win, &ch);
++	win = XCreateWindow(dpy, parentwin, x, y, mw, mh, border_width,
++ 	                    CopyFromParent, CopyFromParent, CopyFromParent,
++ 	                    CWOverrideRedirect | CWBackPixel | CWEventMask, &swa);
++	XSetWindowBorder(dpy, win, scheme[SchemeSel][ColBg].pixel);
+ 
+ 
+ 	/* input methods */
